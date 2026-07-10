@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Portal PWA</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans">
+
+  <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-2xl max-w-sm w-full transition-all duration-300 hover:border-blue-500/50">
+    
+    <div class="text-center mb-8">
+      <div class="h-12 w-12 bg-blue-600 rounded-xl mx-auto flex items-center justify-center shadow-lg shadow-blue-600/30 mb-3">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight">Welcome Back</h1>
+      <p class="text-sm text-slate-400 mt-1">Sign in to your portal account</p>
+    </div>
+
+    <form id="loginForm" class="space-y-5">
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username</label>
+        <input type="text" id="username" required autocomplete="username"
+          class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Password</label>
+        <input type="password" id="password" required autocomplete="current-password"
+          class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition">
+      </div>
+
+      <button type="submit" id="submitBtn"
+        class="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-blue-600/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer flex justify-center items-center">
+        <span id="btnText">Sign In</span>
+      </button>
+    </form>
+    
+    <div id="errorMessage" class="hidden text-center mt-4 text-sm text-red-400 font-medium bg-red-500/10 border border-red-500/20 p-2 rounded-xl"></div>
+  </div>
+
+  <script>
+    // Live Apps Script Web App URL
+    const API_URL = "https://script.google.com/macros/s/AKfycbzt8UYFr0PgQjIzOKonUWISzi9J37ShNtS7L-SaZ39PnKA4E5us1MPDPsa9fZ_S56Ef/exec";
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const usernameInput = document.getElementById('username').value.trim();
+      const passwordInput = document.getElementById('password').value;
+      const errorDiv = document.getElementById('errorMessage');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      
+      errorDiv.classList.add('hidden');
+      btnText.textContent = "Verifying...";
+      submitBtn.disabled = true;
+
+      try {
+        // 1. Request user data from the live backend API
+        const response = await fetch(`${API_URL}?target=users`);
+        const users = await response.json();
+        
+        // 2. Search for a matching username
+        const foundUser = users.find(u => u.USERNAME.toLowerCase() === usernameInput.toLowerCase());
+        
+        if (!foundUser) {
+          throw new Error("Invalid username or password.");
+        }
+
+        // 3. Compare input plain-text password with the Bcrypt hash from the Google Sheet
+        const passwordMatch = dcodeIO.bcrypt.compareSync(passwordInput, foundUser.PASS_HASH);
+        
+        if (passwordMatch) {
+          alert(`Login Successful!\nWelcome back, ${foundUser.USERNAME}.\nYour Role: ${foundUser.ROLE}`);
+        } else {
+          throw new Error("Invalid username or password.");
+        }
+
+      } catch (err) {
+        errorDiv.textContent = err.message || "Error connecting to backend.";
+        errorDiv.classList.remove('hidden');
+      } finally {
+        btnText.textContent = "Sign In";
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
