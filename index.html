@@ -2,49 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>HR Portal Hub</title>
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="EntHub">
+  
+  <link rel="manifest" href="manifest.json">
+  
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+
+  <style>
+    html, body {
+      position: fixed;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans antialiased selection:bg-blue-500/30">
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 w-full h-full flex items-center justify-center p-4 font-sans antialiased selection:bg-blue-500/30">
 
   <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
   <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-  <div class="relative w-full max-w-md bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 p-8 sm:p-10 rounded-3xl shadow-2xl transition-all duration-300 hover:border-slate-700/50">
+  <div class="relative w-full max-w-sm bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 p-6 sm:p-8 rounded-3xl shadow-2xl transition-all duration-300 hover:border-slate-700/50">
     
-    <div class="text-center mb-9">
-      <div class="inline-flex h-14 w-14 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-2xl items-center justify-center shadow-xl shadow-blue-500/20 mb-4 ring-4 ring-slate-900">
-        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <div class="text-center mb-8">
+      <div class="inline-flex h-12 w-12 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-2xl items-center justify-center shadow-xl shadow-blue-500/20 mb-3 ring-4 ring-slate-900">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 018.716 2.253M12 3a9.004 9.004 0 00-8.716 2.253m0 0A9.004 9.004 0 014.284 15M20.716 5.253a9.004 9.004 0 011.008 3A9.004 9.004 0 0120.716 15m-17.432 0A9.004 9.004 0 0012 21M12 3v18" />
         </svg>
       </div>
-      <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+      <h1 class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
         Enterprise Hub
       </h1>
-      <p class="text-sm text-slate-400 mt-2 font-medium">Secure Access Portal</p>
+      <p class="text-xs text-slate-400 mt-1 font-medium">Secure Access Portal</p>
     </div>
 
-    <form id="loginForm" class="space-y-6">
+    <form id="loginForm" class="space-y-5">
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">Username</label>
-        <div class="relative">
-          <input type="text" id="username" required autocomplete="username" placeholder="Enter username"
-            class="w-full bg-slate-950/60 border border-slate-800 rounded-2xl pl-4 pr-4 py-3 text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
-        </div>
+        <label class="block text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-1.5">Username</label>
+        <input type="text" id="username" required autocomplete="username" placeholder="Enter username"
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
       </div>
 
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">Password</label>
-        <div class="relative">
-          <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••"
-            class="w-full bg-slate-950/60 border border-slate-800 rounded-2xl pl-4 pr-4 py-3 text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
-        </div>
+        <label class="block text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-1.5">Password</label>
+        <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••"
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
       </div>
 
       <button type="submit" id="submitBtn" 
-        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:from-blue-700 active:to-indigo-700 text-white font-semibold py-3.5 px-4 rounded-2xl transition-all duration-200 shadow-xl shadow-blue-900/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 flex justify-center items-center gap-2 cursor-pointer group">
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:from-blue-700 active:to-indigo-700 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-all duration-200 shadow-xl shadow-blue-900/30 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-center items-center gap-2 cursor-pointer group">
         <span id="btnText">Sign In to Dashboard</span>
         <svg id="btnIcon" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -52,7 +65,7 @@
       </button>
     </form>
     
-    <div id="errorMessage" class="hidden text-center mt-5 text-xs text-red-400 font-medium bg-red-950/30 border border-red-900/40 py-3 px-4 rounded-2xl backdrop-blur-md animate-fade-in"></div>
+    <div id="errorMessage" class="hidden text-center mt-4 text-[11px] text-red-400 font-medium bg-red-950/30 border border-red-900/40 py-2.5 px-4 rounded-xl backdrop-blur-md"></div>
   </div>
 
   <script>
@@ -68,7 +81,6 @@
       const btnText = document.getElementById('btnText');
       const btnIcon = document.getElementById('btnIcon');
       
-      // Update interface to waiting state
       errorDiv.classList.add('hidden');
       btnText.textContent = "Authenticating...";
       btnIcon.classList.add('hidden');
@@ -88,7 +100,6 @@
         
         if (passwordMatch) {
           alert(`Success! Logging in as standard ${foundUser.ROLE}.`);
-          // Dashboard entry point will be linked here next
         } else {
           throw new Error("Access Denied: Invalid credentials.");
         }
@@ -97,7 +108,6 @@
         errorDiv.textContent = err.message || "Network Error: Couldn't connect.";
         errorDiv.classList.remove('hidden');
       } finally {
-        // Restore elements
         btnText.textContent = "Sign In to Dashboard";
         btnIcon.classList.remove('hidden');
         submitBtn.disabled = false;
