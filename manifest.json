@@ -1,0 +1,16 @@
+{
+  "name": "Enterprise Portal Hub",
+  "short_name": "EntHub",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/9063/9063435.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
