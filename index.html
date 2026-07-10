@@ -3,46 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Company Portal PWA</title>
+  <title>HR Portal Hub</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans">
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans antialiased selection:bg-blue-500/30">
 
-  <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-2xl max-w-sm w-full transition-all duration-300 hover:border-blue-500/50">
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative w-full max-w-md bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 p-8 sm:p-10 rounded-3xl shadow-2xl transition-all duration-300 hover:border-slate-700/50">
     
-    <div class="text-center mb-8">
-      <div class="h-12 w-12 bg-blue-600 rounded-xl mx-auto flex items-center justify-center shadow-lg shadow-blue-600/30 mb-3">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+    <div class="text-center mb-9">
+      <div class="inline-flex h-14 w-14 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-2xl items-center justify-center shadow-xl shadow-blue-500/20 mb-4 ring-4 ring-slate-900">
+        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 018.716 2.253M12 3a9.004 9.004 0 00-8.716 2.253m0 0A9.004 9.004 0 014.284 15M20.716 5.253a9.004 9.004 0 011.008 3A9.004 9.004 0 0120.716 15m-17.432 0A9.004 9.004 0 0012 21M12 3v18" />
+        </svg>
       </div>
-      <h1 class="text-2xl font-bold tracking-tight">Welcome Back</h1>
-      <p class="text-sm text-slate-400 mt-1">Sign in to your portal account</p>
+      <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+        Enterprise Hub
+      </h1>
+      <p class="text-sm text-slate-400 mt-2 font-medium">Secure Access Portal</p>
     </div>
 
-    <form id="loginForm" class="space-y-5">
+    <form id="loginForm" class="space-y-6">
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username</label>
-        <input type="text" id="username" required autocomplete="username"
-          class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition">
+        <label class="block text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">Username</label>
+        <div class="relative">
+          <input type="text" id="username" required autocomplete="username" placeholder="Enter username"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-2xl pl-4 pr-4 py-3 text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
+        </div>
       </div>
 
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Password</label>
-        <input type="password" id="password" required autocomplete="current-password"
-          class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition">
+        <label class="block text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">Password</label>
+        <div class="relative">
+          <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-2xl pl-4 pr-4 py-3 text-slate-200 placeholder-slate-600 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition duration-200">
+        </div>
       </div>
 
-      <button type="submit" id="submitBtn"
-        class="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-blue-600/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer flex justify-center items-center">
-        <span id="btnText">Sign In</span>
+      <button type="submit" id="submitBtn" 
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:from-blue-700 active:to-indigo-700 text-white font-semibold py-3.5 px-4 rounded-2xl transition-all duration-200 shadow-xl shadow-blue-900/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 flex justify-center items-center gap-2 cursor-pointer group">
+        <span id="btnText">Sign In to Dashboard</span>
+        <svg id="btnIcon" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
       </button>
     </form>
     
-    <div id="errorMessage" class="hidden text-center mt-4 text-sm text-red-400 font-medium bg-red-500/10 border border-red-500/20 p-2 rounded-xl"></div>
+    <div id="errorMessage" class="hidden text-center mt-5 text-xs text-red-400 font-medium bg-red-950/30 border border-red-900/40 py-3 px-4 rounded-2xl backdrop-blur-md animate-fade-in"></div>
   </div>
 
   <script>
-    // Live Apps Script Web App URL
     const API_URL = "https://script.google.com/macros/s/AKfycbzt8UYFr0PgQjIzOKonUWISzi9J37ShNtS7L-SaZ39PnKA4E5us1MPDPsa9fZ_S56Ef/exec";
 
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -53,37 +66,40 @@
       const errorDiv = document.getElementById('errorMessage');
       const submitBtn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
+      const btnIcon = document.getElementById('btnIcon');
       
+      // Update interface to waiting state
       errorDiv.classList.add('hidden');
-      btnText.textContent = "Verifying...";
+      btnText.textContent = "Authenticating...";
+      btnIcon.classList.add('hidden');
       submitBtn.disabled = true;
 
       try {
-        // 1. Request user data from the live backend API
         const response = await fetch(`${API_URL}?target=users`);
         const users = await response.json();
         
-        // 2. Search for a matching username
         const foundUser = users.find(u => u.USERNAME.toLowerCase() === usernameInput.toLowerCase());
         
         if (!foundUser) {
-          throw new Error("Invalid username or password.");
+          throw new Error("Access Denied: Invalid credentials.");
         }
 
-        // 3. Compare input plain-text password with the Bcrypt hash from the Google Sheet
         const passwordMatch = dcodeIO.bcrypt.compareSync(passwordInput, foundUser.PASS_HASH);
         
         if (passwordMatch) {
-          alert(`Login Successful!\nWelcome back, ${foundUser.USERNAME}.\nYour Role: ${foundUser.ROLE}`);
+          alert(`Success! Logging in as standard ${foundUser.ROLE}.`);
+          // Dashboard entry point will be linked here next
         } else {
-          throw new Error("Invalid username or password.");
+          throw new Error("Access Denied: Invalid credentials.");
         }
 
       } catch (err) {
-        errorDiv.textContent = err.message || "Error connecting to backend.";
+        errorDiv.textContent = err.message || "Network Error: Couldn't connect.";
         errorDiv.classList.remove('hidden');
       } finally {
-        btnText.textContent = "Sign In";
+        // Restore elements
+        btnText.textContent = "Sign In to Dashboard";
+        btnIcon.classList.remove('hidden');
         submitBtn.disabled = false;
       }
     });
