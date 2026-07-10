@@ -1,0 +1,2 @@
+# testapp
+test pake appscript
